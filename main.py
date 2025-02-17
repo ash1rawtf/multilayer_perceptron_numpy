@@ -1,5 +1,7 @@
 import numpy as np
+from numpy.typing import NDArray
 import pandas as pd
+import typing
 
 TEST_DATA_COUNT = 2000
 
@@ -11,15 +13,28 @@ def get_data():
     train_data = data[TEST_DATA_COUNT:].T
     test_data = data[:TEST_DATA_COUNT].T
 
-    x_train = train_data[1:]
+    X_train = train_data[1:]
     y_train = train_data[0]
 
-    x_test = test_data[1:]
+    X_test = test_data[1:]
     y_test = test_data[0]
+
+    return X_train, y_train, X_test, y_test
+
+
+def init_params(): 
+    W1 = np.random.rand(10, 784) - 0.5
+    b1 = np.random.rand(10, 1) - 0.5
+
+    W2 = np.random.rand(10, 10) - 0.5
+    b2 = np.random.rand(10, 1) - 0.5
+
+    return W1, b1, W2, b2
 
 
 def main():
-    get_data()
+    X_train, y_train, X_test, y_test = get_data()
+    W1, b1, W2, b2 = init_params()
 
 
 if __name__ == "__main__":
